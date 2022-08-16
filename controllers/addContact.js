@@ -4,8 +4,12 @@ const { RequestError } = require("../helpers");
 
 const contactScheme = Joi.object({
   name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.string().required(),
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "ua"] } })
+    .required(),
+  phone: Joi.string()
+    .pattern(/^[0-9]+$/)
+    .required(),
 });
 
 const addContact = async (req, res, next) => {
