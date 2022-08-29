@@ -1,7 +1,7 @@
 const { RequestError } = require("../helpers");
 
 const validationBody = (schema) => {
-  const func = async (req, rex, next) => {
+  const func = async (req, __, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
       next(RequestError(400, error.message));
