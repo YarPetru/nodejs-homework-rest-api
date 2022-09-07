@@ -2,7 +2,7 @@ const express = require("express");
 
 const controller = require("../../controllers/auth");
 const { controllerWrapper } = require("../../helpers");
-const { validationBody, authenticate } = require("../../middlewares");
+const { validationBody, authenticate, upload } = require("../../middlewares");
 
 const { schemas } = require("../../models/user");
 
@@ -25,6 +25,13 @@ router.post(
   authenticate,
   validationBody(schemas.loginSchema),
   controllerWrapper(controller.logout)
+);
+
+router.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatar"),
+  controllerWrapper(controller.updateAvatar)
 );
 
 router.get("/current", authenticate, controllerWrapper(controller.current));
