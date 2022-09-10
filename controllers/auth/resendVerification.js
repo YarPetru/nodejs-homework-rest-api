@@ -3,7 +3,6 @@ const { RequestError, sendMail } = require("../../helpers");
 require("dotenv").config();
 
 const { HOST_NAME } = process.env;
-s;
 
 const resendVerification = async (req, res) => {
   const { email } = req.body;
