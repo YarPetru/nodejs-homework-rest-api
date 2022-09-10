@@ -1,5 +1,9 @@
 const { User } = require("../../models/user");
 const { RequestError, sendMail } = require("../../helpers");
+require("dotenv").config();
+
+const { HOST_NAME } = process.env;
+s;
 
 const resendVerification = async (req, res) => {
   const { email } = req.body;
@@ -13,7 +17,7 @@ const resendVerification = async (req, res) => {
   const mail = {
     to: email,
     subject: "Confirm Your Email",
-    html: `<a href="http://localhost:3000/api/user/verify/${user.verificationToken}" target="_blank>By clicking on the following link, you are confirming your email address </a> `,
+    html: `<a href="${HOST_NAME}/api/user/verify/${user.verificationToken}" target="_blank>By clicking on the following link, you are confirming your email address </a> `,
   };
   await sendMail(mail);
   res.json({

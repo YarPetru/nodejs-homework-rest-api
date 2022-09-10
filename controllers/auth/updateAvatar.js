@@ -5,17 +5,6 @@ const { User } = require("../../models/user");
 
 const Jimp = require("jimp");
 
-// const nomalizedFile = file;
-// Jimp.read(nomalizedFile)
-//   .then((ava) => {
-//     return ava
-//       .resize(250, 250) // resize
-//       .write(file); // save
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-
 const avatarsDir = path.join(__dirname, "../../", "public", "avatars");
 
 const updateAvatar = async (req, res) => {
@@ -28,9 +17,7 @@ const updateAvatar = async (req, res) => {
     await fs.rename(tempUpload, resUpload);
     await Jimp.read(resUpload)
       .then((ava) => {
-        return ava
-          .cover(250, 250) // resize
-          .write(resUpload); // save
+        return ava.cover(250, 250).write(resUpload);
       })
       .catch((err) => {
         console.error(err);
